@@ -33,7 +33,7 @@ public class Day01 : AdventBase
     protected override object InternalPart2()
     {
         var qLeft = new List<int>();
-        var builder = new StringBuilder();
+        var rightMap = new Dictionary<int, int>();
         var sum = 0;
         
         foreach (var input in Input.Lines)
@@ -43,16 +43,15 @@ public class Day01 : AdventBase
             var rightNumber = int.Parse(parts[parts.Length - 1].Trim());
             
             qLeft.Add(leftNumber);
-            builder.Append($"{rightNumber},");
+            if (rightMap.ContainsKey(rightNumber))
+                rightMap[rightNumber]++;
+            else
+                rightMap[rightNumber] = 1;
         }
-
-        var rightList = builder.ToString();
         for (int i = 0; i < qLeft.Count; i++)
         {
-            var regexPattern = @$"{qLeft[i]}";
-            var occurences = Regex.Matches(rightList, regexPattern);
-            var multiply = qLeft[i] * occurences.Count;
-            sum += multiply;
+            if (rightMap.TryGetValue(qLeft[i], out int count))
+             sum += qLeft[i] * count;
         }
         return sum;
     }
