@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+      <UserSecretsId>f2d643ad-5d74-41bc-a0aa-312d4b45ff36</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AdventOfCodeSupport" Version="2.4.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="2023\Inputs\" />
+      <Folder Include="2024\Inputs\" />
+    </ItemGroup>
+
+</Project>
