@@ -6,17 +6,9 @@ public class Day02: AdventBase
 {
     protected override object InternalPart1()
     {
-        var safeReports = 0;
-        foreach (var line in Input.Lines)
-        {
-            var numbers = line.Trim().Split(" ").Select(x => long.Parse(x)).ToList();
-            var safe = SafetyCheck(numbers);
-
-            if (safe)
-                safeReports++;
-        }
-
-        return safeReports;
+        return Input.Lines
+            .Select(line => line.Trim().Split(" ").Select(long.Parse).ToList())
+            .Count(SafetyCheck);
     }
 
     protected override object InternalPart2()
