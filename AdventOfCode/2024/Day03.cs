@@ -7,8 +7,7 @@ public class Day03: AdventBase
     protected override object InternalPart1()
     {
         return Regex.Matches(Input.Text, @"mul\((\d{1,3}),(\d{1,3})\)")
-            .Select(x => long.Parse(x.Groups[1].Value) * long.Parse(x.Groups[2].Value))
-            .Sum();
+            .Sum(x => long.Parse(x.Groups[1].Value) * long.Parse(x.Groups[2].Value));
     }
     protected override object InternalPart2()
     {
@@ -25,6 +24,6 @@ public class Day03: AdventBase
                 else if (isEnabled)
                     validMuls.Add(match);
             } 
-            return validMuls.Select(x => long.Parse(x.Groups[1].Value) * long.Parse(x.Groups[2].Value)).Sum();
+            return validMuls.Sum(x => long.Parse(x.Groups[1].Value) * long.Parse(x.Groups[2].Value));
     }
 }
