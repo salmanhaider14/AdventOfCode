@@ -45,7 +45,7 @@ public class Day02: AdventBase
             var current = numbers[i];
             var next = numbers[i + 1];
             
-            if ((increasing && next <= current) || (!increasing && next >= current) || (Math.Abs(current - next) is > 3 or < 1))
+            if ((increasing && next <= current) || (!increasing && next >= current) || (Math.Abs(current - next) is > 3))
             {
                 safe = false;
                 break;
