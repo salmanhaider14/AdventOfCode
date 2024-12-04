@@ -17,9 +17,9 @@ public class Day03: AdventBase
             
             foreach (Match match in matches)
             {
-                if (match.Value == "don't()")
+                if (match.Value is "don't()")
                     isEnabled = false;
-                else if (match.Value == "do()")
+                else if (match.Value is "do()")
                     isEnabled = true;
                 else if (isEnabled)
                     validMuls.Add(match);
