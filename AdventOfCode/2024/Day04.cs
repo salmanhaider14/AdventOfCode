@@ -96,7 +96,7 @@ public class Day04 : AdventBase
         if (grid[row - 1][col + 1] == 'S' && grid[row + 1][col - 1] == 'M')
             masFound++;
 
-        return masFound == 2;
+        return masFound >= 2;
     }
     
 }

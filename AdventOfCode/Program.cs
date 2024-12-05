@@ -5,7 +5,7 @@ var day = solutions.GetMostRecentDay();
 
 day.Part1();
 day.Part2();
-//day.Benchmark();
+day.Benchmark();
 
 
 
