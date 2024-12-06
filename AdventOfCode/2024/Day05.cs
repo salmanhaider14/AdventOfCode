@@ -36,12 +36,10 @@ public class Day05: AdventBase
                 {
                     var firstIndex = Array.IndexOf(updates, rule.Item1);
                     var secondIndex = Array.IndexOf(updates, rule.Item2);
-                    if ( firstIndex < secondIndex)
-                    {
-                        incorrect = true;
-                        (updates[firstIndex], updates[secondIndex]) = (updates[secondIndex], updates[firstIndex]);
-                        changed = true;
-                    }
+                    if (firstIndex < secondIndex) continue;
+                    incorrect = true;
+                    (updates[firstIndex], updates[secondIndex]) = (updates[secondIndex], updates[firstIndex]);
+                    changed = true;
                 }
             } while (changed);
             
