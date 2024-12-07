@@ -1,11 +1,9 @@
 using AdventOfCodeSupport;
 namespace AdventOfCode._2024;
-
 public class Day06: AdventBase
 {
     private static readonly sbyte[] dx =  { -1, 0, 1, 0 };
     private static readonly sbyte[] dy = { 0, 1, 0, -1 };
-
     protected override object InternalPart1()
     {
         var grid = Input.Lines.Select(x => x.ToCharArray()).ToArray();
@@ -91,10 +89,7 @@ public class Day06: AdventBase
         }
         return false;
     }
-    private static bool IsOutOfTheBounds(char[][] grid, int row, int col, int dirIndex)
-    {
-        return row + dx[dirIndex] < 0 || row + dx[dirIndex] >= grid.Length || col + dy[dirIndex] < 0 || col + dy[dirIndex] >= grid[0].Length;
-    }
+    private static bool IsOutOfTheBounds(char[][] grid, int row, int col, int dirIndex) => row + dx[dirIndex] < 0 || row + dx[dirIndex] >= grid.Length || col + dy[dirIndex] < 0 || col + dy[dirIndex] >= grid[0].Length;
     private static  (int,int) FindGuard(char[][] grid)
     {
         for (var i = 0; i < grid.Length; i++)
