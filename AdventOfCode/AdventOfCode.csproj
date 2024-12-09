@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
       <UserSecretsId>f2d643ad-5d74-41bc-a0aa-312d4b45ff36</UserSecretsId>
   </PropertyGroup>
 
