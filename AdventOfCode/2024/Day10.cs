@@ -1,9 +1,7 @@
 using AdventOfCodeSupport;
-
 namespace AdventOfCode._2024;
-
 public class Day10 : AdventBase
-{
+{ 
     protected override object InternalPart1()
     {
         var grid = Input.Lines.Select(x => x.ToCharArray()).ToArray();
