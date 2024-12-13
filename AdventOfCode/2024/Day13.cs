@@ -1,105 +1,80 @@
 using System.Text.RegularExpressions;
 using AdventOfCodeSupport;
-
 namespace AdventOfCode._2024;
-
-public class Day13: AdventBase
+public partial class Day13: AdventBase
 {
-    //Here I'm just brute-forcing 
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex regex();
     protected override object InternalPart1()
     {
-        var minmumTokens = 0;
+        long minimumTokens = 0;
         var games = Input.Text.Split("\n\n");
+   
         foreach (var game in games)
         {
-            var parts = game.Split("\n");
-            var button1 = Regex.Matches(parts[0], @"\d+");
-            var xA = int.Parse(button1[0].Value);
-            var yA = int.Parse(button1[1].Value);
+            var parts = regex().Matches(game);
             
-            var button2 = Regex.Matches(parts[1], @"\d+");
-            var xB = int.Parse(button2[0].Value);
-            var yB = int.Parse(button2[1].Value);
+            var xA = byte.Parse(parts[0].Value);
+            var yA = byte.Parse(parts[1].Value);
             
-            var prize = Regex.Matches(parts[2], @"\d+");
-            var prizeX = int.Parse(prize[0].Value);
-            var prizeY = int.Parse(prize[1].Value);
+            var xB = byte.Parse(parts[2].Value);
+            var yB = byte.Parse(parts[3].Value);
             
-            var currentXA = 0;
-            var currentYA = 0;
-            var found = false;
-
-            for (int i = 1; i <= 100 && !found; i++)
-            {
-                currentXA += xA;
-                currentYA += yA;
-                
-                var currentXB = 0;
-                var currentYB = 0;
-                
-                for (int j = 1; j <= 100; j++)
-                {
-                    currentXB += xB;
-                    currentYB += yB;
-
-                    if (currentXA + currentXB == prizeX && currentYA + currentYB == prizeY)
-                    {
-                        found = true;
-                        minmumTokens += (i * 3) + j;
-                        break;
-                    }
-                       
-                }
-            }
-        }
-        return minmumTokens;
-    }
-    //Cramer Rule Approach , We back to school guys 
-    protected override object InternalPart2()
-    {
-        long minmumTokens = 0;
-        var games = Input.Text.Split("\n\n");
-        foreach (var game in games)
-        {
-            var parts = game.Split("\n");
-            var button1 = Regex.Matches(parts[0], @"\d+");
-            var xA = int.Parse(button1[0].Value);
-            var yA = int.Parse(button1[1].Value);
-
-            var button2 = Regex.Matches(parts[1], @"\d+");
-            var xB = int.Parse(button2[0].Value);
-            var yB = int.Parse(button2[1].Value);
-
-
-            var prize = Regex.Matches(parts[2], @"\d+");
-            long prizeX = int.Parse(prize[0].Value) + 10000000000000;
-            long prizeY = int.Parse(prize[1].Value) + 10000000000000;
-
-            Console.WriteLine("PrizeX:{0}, PrizeY: {1}", prizeX, prizeY);
-
-            int[][] A = [[xA, xB], [yA,yB]];
+            var prizeX = int.Parse(parts[4].Value);
+            var prizeY = int.Parse(parts[5].Value);
+            
+            byte[][] A = [[xA, xB], [yA,yB]];
             long[] B = [prizeX, prizeY];
             var res = ApplyCramerRule(A, B);
-            Console.WriteLine("Cramer's Rule Results -> X: {0}, Y: {1}", res.Item1, res.Item2);
+
+            if (res == (-1, -1)) continue;
             
-            if (res != (-1, -1))
-            {
-                var (x, y) = res;
-                if(x * xA + y * xB == prizeX && x * yA + y * yB == prizeY )
-                  minmumTokens += (3 * res.Item1) + res.Item2;
-            }
+            var (x, y) = res;
+            if(x * xA + y * xB == prizeX && x * yA + y * yB == prizeY )
+                minimumTokens += (3 * x) + y;
         }
-        return minmumTokens;
+        return minimumTokens;
     }
-    private static (long, long) ApplyCramerRule(int[][] A,long[] B)
+    [GeneratedRegex(@"\d+")]
+    private static partial Regex regex2();
+    protected override object InternalPart2()
+    {
+        long minimumTokens = 0;
+        var games = Input.Text.Split("\n\n");
+        foreach (var game in games)
+        {
+            var parts = regex2().Matches(game);
+            
+            var xA = byte.Parse(parts[0].Value);
+            var yA = byte.Parse(parts[1].Value);
+            
+            var xB = byte.Parse(parts[2].Value);
+            var yB = byte.Parse(parts[3].Value);
+            
+            long prizeX = int.Parse(parts[4].Value) + 10000000000000;
+            long prizeY = int.Parse(parts[5].Value) + 10000000000000;
+
+            byte[][] A = [[xA, xB], [yA,yB]];
+            long[] B = [prizeX, prizeY];
+            var res = ApplyCramerRule(A, B);
+
+            if (res == (-1, -1)) continue;
+            
+            var (x, y) = res;
+            if(x * xA + y * xB == prizeX && x * yA + y * yB == prizeY )
+                minimumTokens += (3 * x) + y;
+        }
+        return minimumTokens;
+    }
+    private static (long, long) ApplyCramerRule(byte[][] A,long[] B)
     {
         long D = (A[0][0] * A[1][1]) - (A[0][1] * A[1][0]);
         if (D == 0) return (-1, -1);
-        long Dx = (B[0] * A[1][1]) - (B[1] * A[0][1]);
-        long Dy = (A[0][0] * B[1]) - (B[0] * A[1][0]);
+        var Dx = (B[0] * A[1][1]) - (B[1] * A[0][1]);
+        var Dy = (A[0][0] * B[1]) - (B[0] * A[1][0]);
 
-        long x = Dx / D;
-        long y = Dy / D;
+        var x = Dx / D;
+        var y = Dy / D;
         
         return (x, y);
     }
