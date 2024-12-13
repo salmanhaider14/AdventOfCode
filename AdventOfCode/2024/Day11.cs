@@ -1,8 +1,4 @@
-
-using System.Collections.Concurrent;
-using System.Numerics;
 using AdventOfCodeSupport;
-
 namespace AdventOfCode._2024
 {
     public class Day11 : AdventBase
@@ -39,7 +35,6 @@ namespace AdventOfCode._2024
 
             return prev.Count;
         }
-
         protected override object InternalPart2()
         {
             var initialStones = Input.Text.Split(" ").ToList();
