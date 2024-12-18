@@ -26,8 +26,7 @@ public class Day18: AdventBase
     protected override object InternalPart2()
     {
         var grid = new char[71][];
-        var bytes = Input.Lines.Select(x => x.Split(",")).Select(y => (int.Parse(y[0]),int.Parse(y[1])));
-        
+        var bytes = Input.Lines.Select(x => x.Split(",")).Select(y => (int.Parse(y[0]),int.Parse(y[1]))).ToArray();
         for (var i = 0; i < grid.Length; i++)
         {
             grid[i] = new char[71];
@@ -36,9 +35,12 @@ public class Day18: AdventBase
                 grid[i][j] = '.';
             }
         }
-        foreach (var (x,y) in bytes)
+        
+        for (var i = 0; i < bytes.Length; i++)
         {
+            var (x, y) = bytes[i];
             grid[y][x] = '#';
+            if (i <= 1024) continue;
             if (FindPath(grid) is -1) return $"{x},{y}";
         }
         return -1;
