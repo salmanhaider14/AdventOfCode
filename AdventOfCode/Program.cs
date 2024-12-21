@@ -9,7 +9,7 @@ var day = solutions.GetMostRecentDay();
 day.Part2();
 
 //await day.SubmitPart1Async();
-// await day.SubmitPart2Async();
+await day.SubmitPart2Async();
 
 //day.Benchmark();
 
